@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class HealthBehaviour : MonoBehaviour
 {
-
+    //health and maximum health values
     public float health;
     public float maxHealth;
+    
+    //GameObject set within Unity Editor to the healthBar gameObject in scene.
     public GameObject healthBar;
-
+    
+    //float variables which determine the rate that health decays over time and how much health player loses per mistake 
     public float timeDecay;
-
     public float healthChunk;
     public float healthGain;
 
+    //Boolean variables for testing purposes to test if alive and/or decaying
     public bool alive;
-
     public bool decaying;
 
+    //Integer representing difficulty value
     public int diff;
     
     // Start is called before the first frame update
@@ -32,6 +35,13 @@ public class HealthBehaviour : MonoBehaviour
         Invoke("CheckDiff", 0.05f);
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Checks the difficulty of the level and sets timeDecay, healthChunk, and healthGain respectively.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void CheckDiff()
     {
         diff = GameObject.Find("DataStorage").GetComponent<LevelController>().difficulty;
@@ -79,17 +89,21 @@ public class HealthBehaviour : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /**************************************************************************************************************************************************
+    * Purpose: Visually and internally decay health every frame based on values.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void Update()
     {
-        
         if(health <= 0 && alive)
         {
             alive = false;
             GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().LevelComplete(false);
 
         }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().seconds == 0)
@@ -99,15 +113,16 @@ public class HealthBehaviour : MonoBehaviour
 
             health = 0;
         }
-
-
         healthBar.transform.localScale = new Vector3(2f * (health / maxHealth), 3, 3.75f);
-
-
-
-
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Coroutine which continually decays health based on timeDecay value.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     IEnumerator Decay()
     {
         
@@ -129,6 +144,13 @@ public class HealthBehaviour : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Adds health to the player
+    * Parameters:
+    *     Arguments: float val; used as amount of health to be given to player
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void AddHealth(float val)
     {
         if(health + val > maxHealth)
@@ -141,7 +163,13 @@ public class HealthBehaviour : MonoBehaviour
         }
     }
 
-
+    /**************************************************************************************************************************************************
+    * Purpose: Subtracts health from the player.
+    * Parameters:
+    *     Arguments: float val; used as amount of health to be taken from player.
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void LoseHealth(float val)
     {
         if (health - val <= 0)
