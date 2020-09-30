@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Banana : MonoBehaviour
 {
+    //sprites is an array of all possible banana sprites
     public Sprite[] sprites;
+    //spriteInt represents the current sprite index.
     public int spriteInt;
 
     // Start is called before the first frame update
