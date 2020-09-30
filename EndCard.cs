@@ -47,6 +47,7 @@ public class EndCard : MonoBehaviour
     void CalcValues()
     {
 
+        //Settings diff to a multiplier for score based on difficulty setting.
         if(GameObject.Find("DataStorage").GetComponent<LevelController>().difficulty == 0)
         {
             diff = 1;
@@ -76,6 +77,7 @@ public class EndCard : MonoBehaviour
             diff = 1.4f;
         }
 
+
         if (GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().wordCount != 0)
         {
             accuracy = GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().totalWords / GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().wordCount;
@@ -85,15 +87,20 @@ public class EndCard : MonoBehaviour
             accuracy = 0;
         }
         
+        //retrieve highest combo and WPM values from other objects.
         highestCombo = GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().highestCombo;
         wpm = 60 * (GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().wordCount/ GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().seconds);
-
+        
+        //Round WPM to an integer
         wpm = Mathf.RoundToInt(wpm);
 
+        //Calculate score value; Difficulty multiplier x WPM/100 * Accuracy/70 * Combo Score
         score = (diff * (1.0f + wpm / 100) * (accuracy*100 / 70) * (GameObject.Find("InputTextBox").transform.GetChild(0).GetChild(0).GetComponent<TextInput>().comboScore));
 
         letterGrade.transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = 36;
         letterGrade.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(0.1698113f, 0.1698113f, 0.1698113f, 1);
+        
+        //produces letter grade based on accuracy
         alphagrade = "F";
         if(accuracy >= 0.6)
         {
@@ -154,14 +161,15 @@ public class EndCard : MonoBehaviour
 
     void OnOpen()
     {
-        
+        //Sets position and pauses time
         GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Time.timeScale = 0;
 
         LeanTween.value(gameObject, new Color(1,1,1,0), new Color(1,1,1,0.6f), 0.6f).setIgnoreTimeScale(true).setOnUpdate((Color val) => {
             GetComponent<Image>().color = val;
         });
-
+        
+        //Moves UI elements inwards from offscreen
         LeanTween.moveX(leftData.GetComponent<RectTransform>(), 0f, 0.75f).setIgnoreTimeScale(true);
         LeanTween.moveX(rightData.GetComponent<RectTransform>(), 0f, 0.75f).setIgnoreTimeScale(true);
         LeanTween.moveX(button1.GetComponent<RectTransform>(), 35f, 0.75f).setIgnoreTimeScale(true);
@@ -203,6 +211,7 @@ public class EndCard : MonoBehaviour
     ***************************************************************************************************************************************************/
     public void NextLevel()
     {
+        //if at final level, running this function will return to main menu, else, proceed to next level
         if(GameObject.Find("DataStorage").GetComponent<LevelController>().level == 30)
         {
             MainMenu();
