@@ -28,7 +28,13 @@ public class ButtonAnim : MonoBehaviour, IPointerDownHandler
         GetComponent<Image>().sprite = norm;
     }
 
-
+    /**************************************************************************************************************************************************
+    * Purpose: Changes sprite and moves button downwards upon being left clicked
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void OnPointerDown(PointerEventData pointerEventData)
     {
         //When user left-clicks on button...
@@ -41,7 +47,13 @@ public class ButtonAnim : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    //Resets press sprites and moves button back to original position
+    /**************************************************************************************************************************************************
+    * Purpose: Resets sprite and moves back to original position.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void Unpress()
     {
         GetComponent<Image>().sprite = norm;
