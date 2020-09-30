@@ -13,11 +13,7 @@ public class CreditCrawl : MonoBehaviour
     public List<string> textLines;
     public float[] typeSpeedArray;
 
-
-
     public int currentLine;
-
-
     public int endAtLine;
     public bool on;
 
@@ -27,9 +23,6 @@ public class CreditCrawl : MonoBehaviour
     public float typeSpeed;
 
     public Sprite textimg;
-
-
-
 
     public GameObject tiedInteractable;
 
@@ -41,6 +34,13 @@ public class CreditCrawl : MonoBehaviour
         
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Applies default color, line index, and state settings to the object
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void OnEnable()
     {
         
@@ -60,18 +60,13 @@ public class CreditCrawl : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-
-
-        
-
-    }
-
-    // Update is called once per frame
+    /**************************************************************************************************************************************************
+    * Purpose: Activates the current line based on a string input. 
+    * Parameters:
+    *     Arguments: string input
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void ActivateLine(string input)
     {
         if (on)
@@ -105,6 +100,14 @@ public class CreditCrawl : MonoBehaviour
 
     }
 
+    
+    /**************************************************************************************************************************************************
+    * Purpose: Private coroutine that scrolls the .text variable of theText based on string input
+    * Parameters:
+    *     Arguments: Student inputOne, Student inputTwo, Student inputThree.
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     private IEnumerator TextScoll(string lineOfText)
     {
 
@@ -127,25 +130,31 @@ public class CreditCrawl : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Updates theText's .text attribute with the element within textlines[] at index currentline.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void UpdateLine()
     {
         theText.text = textLines[currentLine];
     }
 
+
     void OnOpen()
     {
-        
-
         on = true;
-
-
-
-
-
-        //tiedInteractable.GetComponent<Interactable>().canInteract = false;
     }
 
-
+    /**************************************************************************************************************************************************
+    * Purpose: Runs upon closing the UI element, stops all running coroutines, auto-finishes the text scoll, and resets time scale to 1.0.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void OnClose()
     {
         StopAllCoroutines();
@@ -170,6 +179,13 @@ public class CreditCrawl : MonoBehaviour
         //tiedInteractable.GetComponent<Interactable>().canInteract = true;
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Disables this gameObject after 0.05 sec.
+    * Parameters:
+    *     Arguments: Student inputOne, Student inputTwo, Student inputThree.
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void DestroyMe()
     {
         Invoke("Death", 0.05f);
