@@ -8,10 +8,8 @@ public class SoundSample : MonoBehaviour
     public float lifetime;
     public float blend;
     public AudioClip clip;
-
     public bool playing;
 
-    // Start is called before the first frame update
     void Awake()
     {
         aud = GetComponent<AudioSource>();
@@ -33,6 +31,13 @@ public class SoundSample : MonoBehaviour
         }
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Sets aud parameters based on input values, set by the object instantiating this object.
+    * Parameters:
+    *     Arguments: AudioClip a, float b, float vol
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void SpawnSound(AudioClip a, float b, float vol)
     {
         lifetime = a.length;
@@ -43,6 +48,13 @@ public class SoundSample : MonoBehaviour
         PlaySound();
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Plays the AudioClip clip through aud, the AudioSource on this gameObject.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void PlaySound()
     {
         aud.Play();
