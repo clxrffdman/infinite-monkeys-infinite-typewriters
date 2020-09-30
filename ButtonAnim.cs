@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 
 public class ButtonAnim : MonoBehaviour, IPointerDownHandler
 {
+    
+    
     public Sprite norm;
     public Sprite hover;
     public Sprite pressed;
@@ -29,16 +31,17 @@ public class ButtonAnim : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData pointerEventData)
     {
-        //Use this to tell when the user left-clicks on the Button
+        //When user left-clicks on button...
         if (pointerEventData.button == PointerEventData.InputButton.Left)
         {
+            //change sprite to pressed state
             GetComponent<Image>().sprite = pressed;
             childText.anchoredPosition = new Vector3(childText.localPosition.x, childText.localPosition.y - 3f, childText.localPosition.z);
             LeanTween.delayedCall(gameObject, 0.35f, unpress).setIgnoreTimeScale(true);
         }
     }
 
-
+    //Resets press sprites and moves button back to original position
     void Unpress()
     {
         GetComponent<Image>().sprite = norm;
