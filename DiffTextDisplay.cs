@@ -8,13 +8,14 @@ public class DiffTextDisplay : MonoBehaviour
 {
     public TextMeshProUGUI tex;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    /**************************************************************************************************************************************************
+    * Purpose: Updates text display every frame (inefficient I know...) depending on DataStorage difficulty.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void Update()
     {
         if (GameObject.Find("DataStorage") != null)
