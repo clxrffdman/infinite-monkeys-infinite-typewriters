@@ -12,18 +12,15 @@ public class Banana : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //sets position of banana to preset position
         transform.position = new Vector3(-10f, 2.25f, 0);
 
+        //moves banana in the span of 0.1sec while rotating it to a random orientation
         LeanTween.moveX(gameObject, -4.5f, 0.1f);
         LeanTween.rotate(gameObject, new Vector3(0, 0, Random.Range(-180, 180)), 0.1f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //Kills this gameObject (banana)
     public void Kill()
     {
         Destroy(gameObject);
