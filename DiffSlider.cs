@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DiffSlider : MonoBehaviour
 {
 
+    //Instance variables
     public Slider slider;
     public TextMeshProUGUI text;
 
