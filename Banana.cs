@@ -20,7 +20,13 @@ public class Banana : MonoBehaviour
         LeanTween.rotate(gameObject, new Vector3(0, 0, Random.Range(-180, 180)), 0.1f);
     }
 
-    //Kills this gameObject (banana)
+    /**************************************************************************************************************************************************
+    * Purpose: Kills this gameObject (banana)
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void Kill()
     {
         Destroy(gameObject);
