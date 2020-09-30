@@ -10,11 +10,13 @@ public class ScreenShake : MonoBehaviour
     public Camera mainCamera;
     public bool active;
 
-    void Update()
-    {
-
-    }
-
+    /**************************************************************************************************************************************************
+    * Purpose: Begins the camera shake process based on the shake magnetude and the amount of time to shake for.
+    * Parameters:
+    *     Arguments: float shakeMag, float shakeTime
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void ShakeIt(float shakeMag, float shakeTime)
     {
         cameraInitialPosition = mainCamera.transform.localPosition;
@@ -23,6 +25,13 @@ public class ScreenShake : MonoBehaviour
         Invoke("StopCameraShaking", shakeTime);
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Starts shaking the camera.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void StartCameraShaking()
     {
         float cameraShakingOffsetX = Random.value * shakeMagnetude * 2 - shakeMagnetude;
@@ -33,6 +42,13 @@ public class ScreenShake : MonoBehaviour
         mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, cameraIntermadiatePosition, 0.2f);
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Stops shaking the camera.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void StopCameraShaking()
     {
         CancelInvoke("StartCameraShaking");
