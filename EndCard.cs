@@ -7,11 +7,13 @@ using TMPro;
 
 public class EndCard : MonoBehaviour
 {
+    //Float variables representing words per minute, combo, accuracy, and a total score
     public float wpm;
     public float highestCombo;
     public float accuracy;
     public float score;
 
+    //GameObjects representing the data on the left and right, and the buttons to proceed to next level/main menu.
     public GameObject leftData;
     public GameObject rightData;
     public GameObject button1;
@@ -35,12 +37,13 @@ public class EndCard : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /**************************************************************************************************************************************************
+    * Purpose: Calculates values for WPM, combo, accuracy, and score
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void CalcValues()
     {
 
@@ -133,6 +136,13 @@ public class EndCard : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Assigns calculated values to the .text components on the left/right side of the score screen.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void AssignValues()
     {
         rightData.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(score) + " : " + diff + "x";
@@ -164,10 +174,15 @@ public class EndCard : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Called upon clicking the main menu button, loads the main menu screen while unloading the current scene.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void MainMenu()
     {
-        print("hello222222");
-
         Time.timeScale = 1;
         SceneManager.UnloadSceneAsync(2);
         if(GameObject.Find("LevelControlLoader") == null)
@@ -179,6 +194,13 @@ public class EndCard : MonoBehaviour
         
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Increases the level index in DataStorage by one, and reloads the scene with the new level index data.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void NextLevel()
     {
         if(GameObject.Find("DataStorage").GetComponent<LevelController>().level == 30)
