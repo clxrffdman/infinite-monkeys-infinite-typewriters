@@ -32,13 +32,13 @@ public class LineStorage : MonoBehaviour
 
     void Awake()
     {
-        
         if(GameObject.Find("DataStorage") != null)
         {
             currentText = GameObject.Find("DataStorage").GetComponent<LevelController>().level;
         }
         
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,12 +48,13 @@ public class LineStorage : MonoBehaviour
         characterIndex = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /**************************************************************************************************************************************************
+    * Purpose: Check if the word (input) is a move word, and returns a random integer from 1-3 if it is.
+    * Parameters:
+    *     Arguments: string word
+    *
+    *     Return: int
+    ***************************************************************************************************************************************************/
     public int CheckMove(string word)
     {
         for(int i = 0; i < moveWords.Length; i++)
@@ -73,6 +74,13 @@ public class LineStorage : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Checks if the current character index is an end of word character, and returns false if the character index is at the end of a word, true if not.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: bool
+    ***************************************************************************************************************************************************/
     public bool canMistake()
     {
         bool rv = true;
@@ -83,12 +91,18 @@ public class LineStorage : MonoBehaviour
         return rv;
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Checks if the current character is correct based on string input.
+    * Parameters:
+    *     Arguments: string character
+    *
+    *     Return: bool
+    ***************************************************************************************************************************************************/
     public bool CheckChar(string character)
     {
 
         if(textStorage[currentText].Substring(characterIndex,1) == character)
-        {
-            
+        {       
             return true;
         }
         else
@@ -98,14 +112,26 @@ public class LineStorage : MonoBehaviour
         }
     }
 
-    
-
+    /**************************************************************************************************************************************************
+    * Purpose: Fixes the character index upon finishing a word.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void FixCharacterCount()
     {
         characterIndex = textStorage[currentText].IndexOf(" ", startIndex)+1;
         startIndex = characterIndex;
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Returns the integer index of the end character of the current word.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: int
+    ***************************************************************************************************************************************************/
     public int EndOfWordCharacter()
     {
         end = textStorage[currentText].IndexOf(" ", startIndex) - 1;
@@ -113,6 +139,13 @@ public class LineStorage : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Returns one word ahead to be displayed to the player
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: string
+    ***************************************************************************************************************************************************/
     public string OneWordAhead()
     {
         if (textStorage[currentText].Substring(index1) == " END")
@@ -136,6 +169,13 @@ public class LineStorage : MonoBehaviour
 
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Returns the word two words ahead of the current word for the player to see as a preview.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: string
+    ***************************************************************************************************************************************************/
     public string TwoWordsAhead()
     {
         if (textStorage[currentText].Substring(index2 + sub2.Length) == " END")
@@ -160,6 +200,13 @@ public class LineStorage : MonoBehaviour
         
     }
 
+    /**************************************************************************************************************************************************
+    * Purpose: Moves the text to the next word in the sequence
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     public void NextLine()
     {
         startIndex = 0;
