@@ -14,12 +14,17 @@ public class DiffSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //assigns slider.value to the difficulty of the last level
         slider.value = GameObject.Find("DataStorage").GetComponent<LevelController>().difficulty;
     }
 
-
-
-    // Update is called once per frame
+    /**************************************************************************************************************************************************
+    * Purpose: Run necessary checks every frame, assigns the difficulty level in DataStorage based on slider value.
+    * Parameters:
+    *     Arguments: N/A
+    *
+    *     Return: N/A (void function).
+    ***************************************************************************************************************************************************/
     void Update()
     {
 
